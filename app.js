@@ -9,7 +9,6 @@ const notesHTML = fs.readFileSync('public/notes.html', 'utf8');
 
  
 
-const router = 
 
 app.use(express.static("public"));
 
@@ -31,12 +30,13 @@ app.get('/notes', function (req, res) {
 app.get('/api/notes', function (req, res) {
     
         console.log('requested api/notes')
-      res.write (notes);
+      res.send(notes);
       res.end();
 })
 
 app.post('/api/notes', function (req, res) {
-    console.log(res)
+    console.log(req.body)
+      fs.appendFileSync('db/db.json',(JSON.stringify(req.body)));
     console.log('posted to api/notes')
   res.end();
 })
@@ -47,7 +47,6 @@ const server = app.listen(PORT, (error) => {
 
 });
 
-router
 //return notes html
 
 
